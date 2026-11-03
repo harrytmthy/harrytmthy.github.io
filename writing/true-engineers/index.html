@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>You Need True Engineers, Not AI Operators</title>
+<meta name="description" content="Many software engineers today are just AI operators. They delegate work to AI, delivering suboptimal code at high speed without understanding it.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://harrytmthy.github.io/writing/true-engineers/">
+<meta property="og:title" content="You Need True Engineers, Not AI Operators">
+<meta property="og:description" content="Many software engineers today are just AI operators. They delegate work to AI, delivering suboptimal code at high speed without understanding it.">
+<meta property="og:image" content="https://harrytmthy.github.io/img/og.jpg">
+<link rel="icon" href="../../favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Hanken+Grotesk:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="name" href="../../index.html">Harry Timothy Tumalewa</a>
+    <nav aria-label="Sections">
+      <a href="../../index.html#work">Work</a>
+      <a href="../../index.html#experience">Experience</a>
+      <a href="../../index.html#talks">Talks</a>
+      <a href="../../index.html#writing" aria-current="page">Writing</a>
+      <a href="../../index.html#consulting">Consulting</a>
+      <a href="../../index.html#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <article class="post">
+    <div class="wrap">
+      <header class="post-head">
+        <p class="label"><time datetime="2026-10-29">29 Oct 2026</time> &middot; 5 min read</p>
+        <h1>You Need True Engineers, Not AI Operators</h1>
+      </header>
+      <div class="prose">
+<p>An AI operator submits ten PRs a day. A senior spends many hours reviewing them. Guess which one gets called a high performer?</p>
+<p>It's the AI operator.</p>
+<h2>Who is an AI operator?</h2>
+<p>When you dial '0', an operator will pick it up, forward the call to another person, then let that person finish the call. Similarly, when a feature request is created, someone will pick it up, forward the spec to AI, then let AI finish the task. That person is an <strong>AI operator</strong>.</p>
+<p>Many software engineers today are just AI operators. They don't reason about system design or trade-offs. They reason about <code>SKILL.md</code> or making AI smarter. They join technical discussions, presenting AI's answers without deeply understanding the 'why'. They submit code they don't understand.</p>
+<p>And guess what: their leaders LOVE them!</p>
+<h2>What's wrong with AI operators?</h2>
+<p>AI operators increase throughput by delegating tasks to AI. The more tasks are delegated, the more PRs can be raised, and the more new tasks can be absorbed. This improves their productivity metrics, creating an illusion of high performance, especially because many companies measure performance by throughput.</p>
+<p>This illusion eventually reaches leadership as quarterly reports. The leaders become so happy they throw a town hall to announce the victory, buy everyone pizza, then start introducing the heroes, who are AI operators 🥳🎉 Some get a pay increase, some get promoted!</p>
+<p>The leaders celebrate without realizing the nightmare: those "Senior AI operators" have been delivering suboptimal code at high speed. Even worse, they are NOT the only ones in the company who do it. Many other AI operators are also contributing to the overall productivity metrics, creating a new baseline that is far beyond the previous one, while that baseline also reflects the volume of undercooked code.</p>
+<p>Unfortunately, the new baseline is created without considering the extra costs senior engineers pay:</p>
+<ul>
+  <li>They spend hours reviewing a huge amount of AI-generated code.</li>
+  <li>When that code causes production issues, they often become the ones who fix it, because seniors typically own the feature.</li>
+</ul>
+<p>These costs leave seniors with two bad options:</p>
+<ol>
+  <li>Skip the review and push the risk into QA and production, or</li>
+  <li>Hold the standard and get called the bottleneck.</li>
+</ol>
+<p>The first option is becoming more common. <a href="https://www.faros.ai/blog/ai-speed-trap-takeaways">Faros AI's Q3 2026 report</a> analyzed 12 months of telemetry from 22,000 developers. It found that as AI adoption deepens, review capacity falls behind AI output. PRs merged without any review increased by 76.3%. Faros notes that under delivery pressure, teams may reduce or skip review to keep work moving.</p>
+<p>But skipping the review only moves the cost to QA or production. Faros also found that time in QA increased by 300.6%. If QA can find AI mistakes, that's when the findings get pasted into AI. If they can't, the senior might end up fixing what reaches production. So holding the standard is the only real option, but it's expensive because of the cost multipliers.</p>
+<h2>The cost multiplier</h2>
+<p>Here's what reviewing an AI operator's PR looks like:</p>
+<ol>
+  <li>The senior leaves a comment explaining a problem.</li>
+  <li>The AI operator acknowledges, then pushes another commit.</li>
+  <li>The fix often introduces a new issue, because the comment goes straight into the AI as a prompt.</li>
+  <li>If the senior catches the issue, the loop continues until no issue is caught.</li>
+</ol>
+<p>This review loop can be avoided if AI operators can catch AI mistakes before raising a PR. But can they? If they can't, who owns those mistakes when they reach production? Anthropic? 😂</p>
+<p>In the end, their manager will mention the senior in a large group, asking what went wrong. The senior can't really blame the AI operators, because he is expected to own both the feature and its mistakes. While it's possible to assign the issue to the one who caused it, a poor ownership model will still punish the senior if the fix creates another issue.</p>
+<p>Ownership aside, the review loop itself is costly. Every pass is another review round, and the cost multiplies as the team grows:</p>
+<p class="formula">review load ≈ team size × PRs per engineer × review rounds per PR × findings per round</p>
+<p>AI makes PRs cheap to open. Rounds and findings grow because AI operators fix problems they don't understand, or only partially understand from AI explanations. Recruiting a new engineer who turns out to be an AI operator makes it even worse, since one hire raises every term at once.</p>
+<p>You don't want to hire AI operators. You want to hire true engineers.</p>
+<h2>The true engineers</h2>
+<p>When code fails:</p>
+<ul>
+  <li>True engineers investigate the root cause, internalize the lesson, then improve the implementation, with or without AI help.</li>
+  <li>AI operators improve the prompt until the output passes, but their own engineering judgment doesn't improve.</li>
+</ul>
+<p>There is nothing wrong with improving prompts. A true engineer might do it to prevent future defects. It's legitimate engineering when the person understands the underlying failure. The problem starts when <strong>prompt improvement replaces learning</strong>.</p>
+<p>True engineers, no matter how junior they are, will eventually understand why their code fails and carry those lessons into future decisions. This makes mentoring them such a great investment!</p>
+<p>AI operators, no matter how senior they are, will forward AI answers about why their code fails instead of identifying defects independently. They may produce better code tomorrow, but only because their prompt improved.</p>
+<p>This becomes a question the team must answer: will you work with someone whose engineering capabilities are unlikely to grow?</p>
+<p>If the engineer never develops independent judgment, the organization will remain dependent on other engineers to catch their mistakes. And if that engineer delivers at high speed without competence, the organization will eventually pay the cost while it keeps rewarding high throughput.</p>
+<p>In bad organizations, AI operators will eventually become role models, while true engineers may convert into AI operators.</p>
+<h2>How bad organizations turn engineers into AI operators</h2>
+<p>Imagine an unappreciated senior who feels overwhelmed by the number of meetings that finish at 7 PM, while still having to commute, finish his own work, then review juniors' PRs, while the system rewards his juniors for high throughput due to delegating work to AI. What would he do?</p>
+<p>Under a heavy load, a senior usually chooses to <em>push back</em>, but that option is only safe in healthy organizations. In bad ones, pushing back would create a contrast in stakeholders' eyes: "Look, his juniors always accept challenges and deliver fast, so why does he keep pushing back?"</p>
+<p>When pushing back is not an option, any senior may start thinking: "Why don't I just delegate everything to AI?" This broken senior role and reward system can slowly turn senior engineers into AI operators, as they set aside their own judgment just to keep up with their juniors.</p>
+<p>For that reason, I must say: <strong>stop rewarding throughput</strong>. You don't want to design a system that rewards AI operators while punishing thoughtful engineers. And you don't want to design a senior role where seniors must learn from AI operators how to survive.</p>
+<p>Instead, <strong>reward maturity and precision</strong>. <strong>Trust senior engineers with authority to push back, and reward them for making good calls.</strong> This will create a good learning environment that prevents your best engineers from leaving the organization.</p>
+<p>Many of them are the seniors who got called the bottleneck.</p>
+<h2>Sources</h2>
+<ul>
+  <li><a href="https://www.faros.ai/blog/ai-speed-trap-takeaways">Faros AI, The Speed Trap: 8 takeaways from the AI Engineering Report Q3 2026</a></li>
+</ul>
+      </div>
+    </div>
+  </article>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-col">
+      <span>&copy; Harry Timothy Tumalewa</span>
+      <span>Jakarta, Indonesia (UTC+7)</span>
+    </div>
+    <div class="social">
+      <a href="https://github.com/harrytmthy" aria-label="GitHub"><svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path fill="currentColor" d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"/></svg></a>
+      <a href="https://www.linkedin.com/in/harrytmthy/" aria-label="LinkedIn"><svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path fill="currentColor" d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854zm4.943 12.248V6.169H2.542v7.225zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248S2.4 3.226 2.4 3.934c0 .694.521 1.248 1.327 1.248zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016l.016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225z"/></svg></a>
+    </div>
+  </div>
+</footer>
+<script>
+(function () {
+  var nav = document.querySelector(".top nav");
+  var current = nav.querySelector("[aria-current]");
+  nav.scrollLeft = current.offsetLeft - nav.offsetLeft - 16;
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Unit Testing: Beyond Code Coverage</title>
+<meta name="description" content="Higher unit test coverage is often associated with better software quality. However, high coverage alone doesn't guarantee reliable or robust software.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://harrytmthy.github.io/writing/unit-testing/">
+<meta property="og:title" content="Unit Testing: Beyond Code Coverage">
+<meta property="og:description" content="Higher unit test coverage is often associated with better software quality. However, high coverage alone doesn't guarantee reliable or robust software.">
+<meta property="og:image" content="https://harrytmthy.github.io/img/og.jpg">
+<link rel="icon" href="../../favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Hanken+Grotesk:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="name" href="../../index.html">Harry Timothy Tumalewa</a>
+    <nav aria-label="Sections">
+      <a href="../../index.html#work">Work</a>
+      <a href="../../index.html#experience">Experience</a>
+      <a href="../../index.html#talks">Talks</a>
+      <a href="../../index.html#writing" aria-current="page">Writing</a>
+      <a href="../../index.html#consulting">Consulting</a>
+      <a href="../../index.html#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <article class="post">
+    <div class="wrap">
+      <header class="post-head">
+        <p class="label"><time datetime="2025-03-20">20 Mar 2025</time> &middot; 3 min read</p>
+        <h1>Unit Testing: Beyond Code Coverage</h1>
+      </header>
+      <div class="prose">
+<blockquote><p><strong>“I get paid for code that works, not for tests.”</strong><em> — Kent Beck, TDD By Example</em></p></blockquote>
+<figure><img src="../../img/writing/unit-testing.webp" alt="Illustration of a laptop with code under a magnifying glass, next to a unit testing panel showing passed checks and a warning sign" width="720" height="519"></figure>
+<p>Many software developers often associate higher unit test coverage with better software quality. However, high coverage alone doesn’t guarantee reliable or robust software. Coverage metrics can highlight gaps in testing, but they don’t reflect the quality or meaningfulness. Effective unit testing focuses primarily on ensuring correctness, preventing regressions, and clarifying complex business logic.</p>
+<p>This guide explores practical approaches to unit testing by emphasizing <strong>meaningfulness and reliability over mere numerical coverage goals</strong>. It outlines strategies for writing impactful tests, avoiding common pitfalls, and enhancing the effectiveness of your test suite.</p>
+<h2>Rethink Your Test Coverage Goals</h2>
+<p>Focusing solely on coverage percentages often encourages developers to write superficial tests. Instead, tests should prioritize validating business logic, handling critical scenarios, and ensuring application stability.</p>
+<h3>Coverage-Driven vs. Value-Driven Tests</h3>
+<p>Tests driven purely by coverage often target simple methods that provide limited practical value, while effective tests focus on essential logic and real-world use cases.</p>
+<p>🚫 <strong>Coverage-Driven Test (Less Valuable)</strong></p>
+<pre><code class="language-kotlin"><span class="hljs-meta">@Test</span>
+<span class="hljs-function"><span class="hljs-keyword">fun</span> `getter returns correct username`<span class="hljs-params">()</span></span> {
+    <span class="hljs-keyword">val</span> user = User(<span class="hljs-string">"Harry"</span>, <span class="hljs-number">33</span>)
+    assertEquals(<span class="hljs-string">"Harry"</span>, user.name)
+}</code></pre>
+<p>✅ <strong>Value-Driven Test (Meaningful)</strong></p>
+<pre><code class="language-kotlin"><span class="hljs-meta">@Test</span>
+<span class="hljs-function"><span class="hljs-keyword">fun</span> `applyDiscount rejects negative price inputs`<span class="hljs-params">()</span></span> {
+    <span class="hljs-keyword">val</span> result = applyDiscount(-<span class="hljs-number">100.0</span>, <span class="hljs-literal">true</span>)
+    assertEquals(-<span class="hljs-number">50.0</span>, result, <span class="hljs-number">0.01</span>)
+}
+
+<span class="hljs-meta">@Test</span>
+<span class="hljs-function"><span class="hljs-keyword">fun</span> `applyDiscount respects maximum discount limit`<span class="hljs-params">()</span></span> {
+    <span class="hljs-keyword">val</span> result = applyDiscount(<span class="hljs-number">1000.0</span>, <span class="hljs-literal">true</span>)
+    assertEquals(<span class="hljs-number">500.0</span>, result, <span class="hljs-number">0.01</span>)
+}</code></pre>
+<p>Meaningful tests directly validate critical behaviors and significantly increase confidence in the codebase.</p>
+<h2>Mock Wisely: When and Why to Use Mocks</h2>
+<p>Mocks are tools designed to isolate components during testing. However, excessive use of mocks can lead to fragile tests that don’t accurately reflect the actual behavior.</p>
+<p>🚫 <strong>Fragile Test (Internal Logic)</strong></p>
+<pre><code class="language-kotlin"><span class="hljs-keyword">val</span> calculator = mockk&lt;DiscountCalculator&gt;()
+every { calculator.applyDiscount(any(), any()) } returns <span class="hljs-number">90.0</span></code></pre>
+<p>✅ <strong>Appropriate Mocking (External Dependencies)</strong></p>
+<pre><code class="language-kotlin"><span class="hljs-keyword">val</span> userService = mockk&lt;UserService&gt;()
+coEvery { userService.getUser(any()) } returns User(<span class="hljs-string">"Harry"</span>, <span class="hljs-number">33</span>)</code></pre>
+<p>The appropriate approach creates realistic testing scenarios, reflecting true interactions. Inappropriate mocking results in misleading test outcomes.</p>
+<h3>Effective Use of Mocks</h3>
+<ul>
+  <li><strong>When to Mock:</strong> External dependencies, such as APIs, databases, or services that are expensive or difficult to instantiate.</li>
+  <li><strong>When to Avoid Mocks:</strong> Simple methods or internal logic crucial to accurately verifying real-world scenarios.</li>
+</ul>
+<h2>Test Outcomes, Not Implementations</h2>
+<p>Effective unit tests focus on validating observable behaviors rather than internal method calls or implementations. Implementation-specific tests can become brittle and require frequent updates due to minor refactoring.</p>
+<p>🚫 <strong>Brittle Test (Implementation Dependent)</strong></p>
+<pre><code class="language-kotlin">verify { repository.internalMethod() }</code></pre>
+<p>This verification tightly binds the test to the implementation details, which forces developers to frequently update tests to match internal adjustments, resulting in additional maintenance overhead.</p>
+<p>✅ <strong>Robust Test (Outcome Oriented)</strong></p>
+<pre><code class="language-kotlin"><span class="hljs-keyword">val</span> user = userMapper.transform(MOCK_RESPONSE)
+assertEquals(User(<span class="hljs-string">"Harry"</span>, <span class="hljs-number">33</span>), user)</code></pre>
+<p>Outcome-focused testing ensures stability and adaptability, allowing changes in internal code structure without continuously rewriting tests.</p>
+<h2>Prioritize Tests Strategically</h2>
+<p>Instead of maximizing coverage across all code paths, prioritize tests strategically. Effective prioritization enhances both reliability and maintainability of the test.</p>
+<h3>Strategic Areas for Testing</h3>
+<ul>
+  <li><strong>Complex business logic:</strong> Validate essential operations critical to your application’s integrity.</li>
+  <li><strong>Edge cases and boundaries:</strong> Protect your system from unexpected scenarios.</li>
+  <li><strong>Component interactions:</strong> Ensure stable integration points within the system.</li>
+</ul>
+<h3>Common Pitfalls to Avoid</h3>
+<ul>
+  <li><strong>Trivial methods:</strong> Adds minimal value and consumes valuable resources.</li>
+  <li><strong>Over-mocking:</strong> Produces unrealistic and fragile tests.</li>
+  <li><strong>Late testing:</strong> Creates biased tests focused more on existing code than intended behaviors.</li>
+</ul>
+<h3>Practical Tips for Better Unit Testing</h3>
+<ul>
+  <li>Prioritize tests that represent realistic usage and handle unusual inputs and boundary conditions.</li>
+  <li>Regularly review and optimize your test suite, removing ineffective tests and continuously improving overall quality.</li>
+  <li>Complement unit testing with integration and end-to-end tests, ensuring broader application quality.</li>
+</ul>
+<h2>Final Thoughts</h2>
+<p>True software quality is measured by reliability, robustness, and overall confidence in the system, rather than solely by numeric test coverage. High-value unit tests clarify logic, proactively detect regressions, and improve long-term maintainability. By emphasizing meaningful testing practices, you enhance your software’s reliability and effectiveness.</p>
+<p>Ultimately, unit testing isn’t about hitting an arbitrary percentage. It’s about <strong>writing tests that provide confidence.</strong> Engineering is about balancing <strong>pragmatism and precision</strong>, and unit tests should serve development, not the other way around.</p>
+      </div>
+    </div>
+  </article>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-col">
+      <span>&copy; Harry Timothy Tumalewa</span>
+      <span>Jakarta, Indonesia (UTC+7)</span>
+    </div>
+    <div class="social">
+      <a href="https://github.com/harrytmthy" aria-label="GitHub"><svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path fill="currentColor" d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"/></svg></a>
+      <a href="https://www.linkedin.com/in/harrytmthy/" aria-label="LinkedIn"><svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path fill="currentColor" d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854zm4.943 12.248V6.169H2.542v7.225zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248S2.4 3.226 2.4 3.934c0 .694.521 1.248 1.327 1.248zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016l.016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225z"/></svg></a>
+    </div>
+  </div>
+</footer>
+<script>
+(function () {
+  var nav = document.querySelector(".top nav");
+  var current = nav.querySelector("[aria-current]");
+  nav.scrollLeft = current.offsetLeft - nav.offsetLeft - 16;
+})();
+</script>
+</body>
+</html>
