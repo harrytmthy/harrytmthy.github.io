@@ -199,11 +199,10 @@
             </div>
             <div class="result" role="status">
               <p data-fs-success>Message sent. I'll reply by email.</p>
-              <p data-fs-error>Couldn't send your message. Please try again or use the email below.</p>
+              <p data-fs-error>Couldn't send your message. Please try again or email me at <a href="mailto:harry.tumalewa@gmail.com">harry.tumalewa@gmail.com</a>.</p>
             </div>
           </div>
         </form>
-        <p class="mail"><a class="email" id="email" href="mailto:harry.tumalewa@gmail.com">harry.tumalewa@gmail.com</a><button class="copy" id="copy-email" type="button">Copy</button></p>
       </div>
     </div>
   </section>
@@ -425,28 +424,6 @@
   var arrival = location.hash && document.getElementById(location.hash.slice(1));
   if (arrival) arrival.scrollIntoView({ behavior: "instant" });
   update();
-})();
-
-(function () {
-  var btn = document.getElementById("copy-email");
-  var email = document.getElementById("email");
-  btn.addEventListener("click", function () {
-    var text = email.textContent.trim();
-    function selectIt() {
-      var range = document.createRange();
-      range.selectNodeContents(email);
-      var sel = window.getSelection();
-      sel.removeAllRanges();
-      sel.addRange(range);
-      btn.textContent = "Selected";
-    }
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(text).then(function () { btn.textContent = "Copied"; }, selectIt);
-    } else {
-      selectIt();
-    }
-    setTimeout(function () { btn.textContent = "Copy"; }, 2000);
-  });
 })();
 
 window.formspree = window.formspree || function () { (formspree.q = formspree.q || []).push(arguments); };

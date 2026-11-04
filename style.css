@@ -197,10 +197,6 @@ dialog.lightbox::backdrop { background: rgba(8, 10, 12, 0.8); }
 /* Contact: shares one band with the footer */
 #contact, footer { background: var(--surface); }
 .cta, .post h1 { margin: 0; font-family: var(--f-display); font-weight: 800; font-stretch: 112%; font-size: clamp(1.75rem, 4vw, 2.75rem); line-height: 1.05; letter-spacing: -0.02em; text-wrap: balance; }
-.mail { margin: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; }
-.email { min-width: 0; font-size: clamp(1.125rem, 2.4vw, 1.5rem); font-weight: 500; overflow-wrap: anywhere; }
-.copy { font: 500 0.8125rem var(--f-body); padding: 6px 12px; border-radius: 999px; border: 1px solid var(--rule); background: var(--surface); color: var(--ink); cursor: pointer; }
-.copy:hover { border-color: var(--ink); }
 .form { display: grid; gap: 20px; max-width: 40rem; }
 .form fieldset { margin: 0; padding: 0; border: 0; display: flex; flex-wrap: wrap; gap: 8px 24px; }
 .form legend, .field label { padding: 0; margin-bottom: 8px; font-weight: 600; font-size: 0.9375rem; }
