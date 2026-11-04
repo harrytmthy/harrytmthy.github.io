@@ -73,6 +73,7 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
   text-wrap: balance;
 }
 .hero h1 .dot { color: var(--accent); }
+.hero .label { color: var(--ink); }
 .lead { margin: 0; max-width: 40rem; font-size: clamp(1.0625rem, 1.6vw, 1.25rem); color: var(--ink); }
 .status { display: inline-flex; align-items: center; gap: 10px; font-size: 0.9375rem; color: var(--muted); }
 .status .pulse { width: 8px; height: 8px; border-radius: 50%; background: var(--ok); box-shadow: 0 0 0 4px color-mix(in srgb, var(--ok) 22%, transparent); flex: none; }
