@@ -172,6 +172,37 @@
       <h2 id="contact-h" class="label">Contact</h2>
       <div class="body">
         <p class="cta">Let's work together.</p>
+        <form class="form" id="contact-form" action="https://formspree.io/f/xzeeyazk" method="POST">
+          <fieldset>
+            <legend>Inquiry type</legend>
+            <label><input type="radio" name="inquiry" value="Consulting / Project" required>Consulting / Project</label>
+            <label><input type="radio" name="inquiry" value="Full-time role">Full-time role</label>
+            <label><input type="radio" name="inquiry" value="Other">Other</label>
+          </fieldset>
+          <div class="field">
+            <label for="f-name">Name</label>
+            <input id="f-name" type="text" name="name" autocomplete="name" required>
+          </div>
+          <div class="field">
+            <label for="f-email">Email</label>
+            <input id="f-email" type="email" name="email" autocomplete="email" required data-fs-field aria-describedby="f-email-error">
+            <span id="f-email-error" data-fs-error="email">Please enter a valid email address.</span>
+          </div>
+          <div class="field">
+            <label for="f-message">Message</label>
+            <textarea id="f-message" name="message" rows="5" required></textarea>
+          </div>
+          <p class="note">This form uses Formspree. Your details will be used to respond to your inquiry.</p>
+          <div>
+            <div class="actions">
+              <button class="btn primary" type="submit" data-fs-submit-btn>Send message</button>
+            </div>
+            <div class="result" role="status">
+              <p data-fs-success>Message sent. I'll reply by email.</p>
+              <p data-fs-error>Couldn't send your message. Please try again or use the email below.</p>
+            </div>
+          </div>
+        </form>
         <p class="mail"><a class="email" id="email" href="mailto:harry.tumalewa@gmail.com">harry.tumalewa@gmail.com</a><button class="copy" id="copy-email" type="button">Copy</button></p>
       </div>
     </div>
@@ -417,6 +448,10 @@
     setTimeout(function () { btn.textContent = "Copy"; }, 2000);
   });
 })();
+
+window.formspree = window.formspree || function () { (formspree.q = formspree.q || []).push(arguments); };
+formspree("initForm", { formElement: "#contact-form", formId: "xzeeyazk", useDefaultStyles: false });
 </script>
+<script src="https://unpkg.com/@formspree/ajax@1.1.5/dist/global.js" integrity="sha384-9fQrvHz7unHjhv7e+pJqhvNxPV4tYHHsSn3PxBIEyPTGY8Q/PAKM1sfhL+zTYmhc" crossorigin="anonymous" defer></script>
 </body>
 </html>
