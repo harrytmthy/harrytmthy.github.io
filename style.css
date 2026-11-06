@@ -211,7 +211,7 @@ dialog.lightbox::backdrop { background: rgba(8, 10, 12, 0.8); }
 button.btn { font-family: inherit; cursor: pointer; }
 .btn:disabled { opacity: 0.6; cursor: progress; }
 [data-fs-error], [data-fs-success] { display: none; margin: 0; color: var(--error); }
-[data-fs-success] { color: var(--ok); }
+[data-fs-success] { color: var(--ok); overflow-wrap: anywhere; }
 [data-fs-active] { display: block; }
 .result > [data-fs-active] { padding-top: 20px; }
 .field [data-fs-error] { margin-top: 6px; font-size: 0.875rem; }

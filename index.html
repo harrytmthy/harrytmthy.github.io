@@ -198,7 +198,7 @@
               <button class="btn primary" type="submit" data-fs-submit-btn>Send message</button>
             </div>
             <div class="result" role="status">
-              <p data-fs-success>Message sent. I'll reply by email.</p>
+              <p data-fs-success>Message sent. I'll reply to <span id="reply-to"></span> within a few hours.</p>
               <p data-fs-error>Couldn't send your message. Please try again or email me at <a href="mailto:harry.tumalewa@gmail.com">harry.tumalewa@gmail.com</a>.</p>
             </div>
           </div>
@@ -428,6 +428,9 @@
 
 window.formspree = window.formspree || function () { (formspree.q = formspree.q || []).push(arguments); };
 formspree("initForm", { formElement: "#contact-form", formId: "xzeeyazk", useDefaultStyles: false });
+document.getElementById("contact-form").addEventListener("submit", function () {
+  document.getElementById("reply-to").textContent = document.getElementById("f-email").value;
+});
 </script>
 <script src="https://unpkg.com/@formspree/ajax@1.1.5/dist/global.js" integrity="sha384-9fQrvHz7unHjhv7e+pJqhvNxPV4tYHHsSn3PxBIEyPTGY8Q/PAKM1sfhL+zTYmhc" crossorigin="anonymous" defer></script>
 </body>
