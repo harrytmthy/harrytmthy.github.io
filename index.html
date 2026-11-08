@@ -91,8 +91,8 @@
       <div class="body">
         <ol class="rows">
           <li><span class="when">2025 - now</span><div class="what"><span class="role">Senior Android Engineer</span><span class="org">Self-employed</span><p class="did">Designing and publishing SafeBox and Stitch.</p></div></li>
-          <li><span class="when">2024 - 2025</span><div class="what"><span class="role">Senior Software Engineer, Mobile (Android)</span><span class="org">Grab</span><p class="did">Developed a server-driven instruction system to optimize driver distributions.</p></div></li>
-          <li><span class="when">2022 - 2023</span><div class="what"><span class="role">Software Engineer Lead, previously Software Engineer</span><span class="org">GudangAda</span><p class="did">Led platform optimizations while maintaining a 99% crash-free rate.</p></div></li>
+          <li><span class="when">2024 - 2025</span><div class="what"><span class="role">Senior Software Engineer, Mobile (Android)</span><span class="org">Grab</span><p class="did">Built server-driven features for Ride Guide and driver incentives, and led a Flutter-to-native migration.</p></div></li>
+          <li><span class="when">2022 - 2023</span><div class="what"><span class="role">Software Engineer Lead, previously Software Engineer</span><span class="org">GudangAda</span><p class="did">Led a phased modularization with the team, reducing build time by 30%.</p></div></li>
           <li><span class="when">2021</span><div class="what"><span class="role">Associate Manager</span><span class="org">Accenture</span><p class="did">Cut Hot Start time from 2s to 0.5s and raised the crash-free rate from 94% to 97%.</p></div></li>
           <li><span class="when">2019 - 2020</span><div class="what"><span class="role">SDE II</span><span class="org">DANA Indonesia</span><p class="did">Built Nearby Me merchant discovery while mentoring an intern new to Kotlin, shipping on schedule.</p></div></li>
           <li><span class="when">2018 - 2019</span><div class="what"><span class="role">Android Developer</span><span class="org">CODE.ID</span><p class="did">Built a client app with Clean Architecture and MVVM, delivered ahead of schedule.</p></div></li>
@@ -254,11 +254,11 @@
   var apps = {
     grab: { name: "Grab Driver", intro: "Grab's driver partner app to receive bookings and manage earnings.", icon: "img/apps/grab.png", rating: "4.3", downloads: "50M+ downloads", play: "https://play.google.com/store/apps/details?id=com.grabtaxi.driver2",
       contribution: [
-        "I built the Android side of a feature that shows drivers nearby high-demand areas on the map, so they know where to go for their next booking. Demand shifts within minutes, and an area stops being high-demand once enough drivers head there, so the map needed real-time updates.",
-        "I proposed a push and pull architecture. The app listens for updates over WebSocket and also polls the backend on a fixed interval, so a dropped connection, like driving through a tunnel, never leaves the map stale for long.",
-        "The feature also had to ship on a new Map SDK that was still being rolled out. I put it behind a feature flag with a fallback to the old SDK, so when an SDK issue reached production, we contained it by turning the flag off."
+        "I built the Android side of Ride Guide, a feature that shows drivers nearby high-demand areas on the map, so they know where to go for their next booking. Demand shifts within minutes, and an area stops being high-demand once enough drivers head there, so the map needed real-time updates.",
+        "I also improved the Streak Zone experience with a small indicator in GrabMaps that counts down the time left once a streak starts. It shows confetti when the streak is complete and turns red when the driver is no longer eligible. Tapping it opens a bottom sheet with the streak's progress and potential reward, or the reason a driver lost eligibility. I made Streak Zone geofences highlight when the driver is inside them too, so drivers know they're in the right area.",
+        "When the Incentive Detail page was still in Flutter, I added the Streak Zone information there. Soon after, Grab began deprecating its Flutter pages, so I led the migration of Ride Guide and incentive pages to native Android, splitting the subtasks with junior engineers."
       ],
-      stack: grabStack },
+      stack: grabStack.concat("Flutter") },
     passenger: { name: "Grab", intro: "Southeast Asia's leading superapp, available in eight countries, with everyday services from rides to food delivery.", icon: "img/apps/grab-passenger.png", rating: "4.8", downloads: "100M+ downloads", play: "https://play.google.com/store/apps/details?id=com.grabtaxi.passenger",
       contribution: ["I added missing functionality to Grab's shared design system, which is built with Jetpack Compose."],
       stack: grabStack },
